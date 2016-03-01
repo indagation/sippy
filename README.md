@@ -19,6 +19,7 @@ The sippy.html file uploads all of the required files. You just specify the prob
 
 ###How do I build my own problem?
 You really only need to build one js file. The js file really just needs three functions:
+
 -resetProblem: This function sets the state of the problem. It will get called every time you need a new problem. It takes the current state and grade. It will return the current state.
 -buildProblem: This function gets called every time the problem needs to be displayed. That can be on a page load or a new problem. It takes the state and returns the state.
 -setGrade: This problem doesn't actually grade, but it sets the answer, expected, and feedback. It takes state and returns state.
