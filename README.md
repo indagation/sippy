@@ -13,6 +13,7 @@ The problem type consists of a couple of mandatory javascript files. It uses req
 1. Upload all of the files in the required folder to your edX course.
 2. Upload the js files from one of the example folders to your edX course.
 3. Create a problem component from the xml file in the example.
+Or you can just enroll in my edge.edx.org course and check out the examples: https://edge.edx.org/courses/course-v1:MITx+S101+2T2016/about
 
 ###How does it work?
 The sippy.html file uploads all of the required files. You just specify the problem js as a parameter in the url of the JSInput problem.
