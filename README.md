@@ -3,7 +3,7 @@
 
 ###What is SIPPY?
 Sippy is a problem type that was built for edX problems. (To be honest, it is really just a JSInput problem) 
-The problem consists of a couple of mandatory javascript files. It uses require.js and jquery to make it easily extendible, and it use jsChannel to talk to edX.
+The problem type consists of a couple of mandatory javascript files. It uses require.js and jquery to make it easily extendible, and it uses jsChannel to talk to edX.
 
 ###Use Cases
 - Incremental Problem: The user is awarded a fraction of a point every time they get a question right. They are reset down to 0 every time they get a problem wrong. (See examples/chemistry)
@@ -16,3 +16,9 @@ The problem consists of a couple of mandatory javascript files. It uses require.
 
 ###How does it work?
 The sippy.html file uploads all of the required files. You just specify the problem js as a parameter in the url of the JSInput problem.
+
+###How do I build my own problem?
+You really only need to build one js file. The js file really just needs three functions:
+-resetProblem: This function sets the state of the problem. It will get called every time you need a new problem. It takes the current state and grade. It will return the current state.
+-buildProblem: This function gets called every time the problem needs to be displayed. That can be on a page load or a new problem. It takes the state and returns the state.
+-setGrade: This problem doesn't actually grade, but it sets the answer, expected, and feedback. It takes state and returns state.
