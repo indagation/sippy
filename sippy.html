@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+          function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+              results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+          }
+          var state;
+          var type = getParameterByName("type");
+
+          function getMathJax(string){
+            return '\\\(' + string + '\\\)';
+          }
+          
+          var timeout;
+
+          function buildMathJax(ele,string){
+            ele.html(string);
+            ele.hide();
+            ele_id = ele.attr('id');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,ele_id]);
+            //clearTimeout(timeout);
+            timeout = setTimeout(function(){ ele.show(); }, 500);
+          }
+
+        </script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script data-main="app.js" src="require.js"></script>
+    </head>
+    <body>
+      <div id="container">
+        <div id="problem">
+          <div id="prompt"></div>
+          <button type="button" id="check" style="display:none">Check</button>
+          <input type="text" id="input"/>
+          <span id="display"></span>
+        </div>
+        <div id="feedbackArea" style="display:none">
+          <div id="feedback"></div>
+          <button type="button" id="next">Next</button>
+        </div>
+        <div id="buffer" style="display:none"></div>
+      </div>
+    </body>
+</html>
