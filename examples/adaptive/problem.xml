@@ -1,0 +1,63 @@
+<problem>
+  <script type="loncapa/python">
+
+##############################
+# The following is the code needed to implement a consecutive incremental problem
+# All logic should be handled through the jsinput ConsecutiveInput.html
+# The only value that needs to be edited here is the value of the increment
+# A value of 0.1 would require 10 consecutive answers for full credit.
+incremental_value = 0.1
+##############################
+import random
+import json
+
+x = random.randint(0,10)
+def consecutive_feedback(expect, ans):
+  par = json.loads(ans)
+  state = json.loads(par["state"])
+  ans = json.loads(par["answer"])
+  grade = 1
+  if ans["correctness"] == "correct":
+    return {
+      'input_list': [
+         { 
+       'ok': True,
+       'msg': ans["feedback"],
+       'grade_decimal': grade
+         },
+      ]
+  }
+  else:
+    return {
+      'input_list': [
+         { 
+       'ok': False, 
+       'msg': ans["feedback"],
+       'grade_decimal': grade
+     },
+      ]
+  }
+def increment_grade(answer_ids, student_answers, new_cmap, old_cmap):
+  aid = answer_ids[0]
+  ans = str(student_answers[aid]).lower()
+  print 'hint_fn called, ans=', ans
+  hint = ''
+  old_points = old_cmap.get_npoints(aid)
+  if new_cmap.get_correctness(aid) != "correct":
+    hint = 'Wrong: ' + new_cmap.get_correctness(aid)
+    if old_points > incremental_value:
+      new_cmap.set_property(aid,'npoints',old_points - incremental_value)
+    else:
+      new_cmap.set_property(aid,'npoints',0)
+  else:
+    hint = 'Correct: ' + new_cmap.get_correctness(aid)
+    if old_points != 1:
+      new_cmap.set_property(aid,'npoints',old_points + incremental_value)
+
+</script>
+  <p>Answer 10 in a row to get full credit. Be careful though. If you miss one your score will be reset to 0.</p>
+  <customresponse cfn="consecutive_feedback">
+    <jsinput gradefn="ConsecutiveInput.getGrade" get_statefn="ConsecutiveInput.getState" set_statefn="ConsecutiveInput.setState" width="100%" height="86" html_file="/static/sippy.html?type=SampleAdaptiveProblem"/>
+    <hintgroup hintfn="increment_grade"/>
+  </customresponse>
+</problem>
