@@ -1,5 +1,5 @@
 # SIPPY
-## (**S**imple **I**ncremental **P**artial-credit **P**roblem **Y**o)
+## (Simple Incremental Partial-credit Problem Yo)
 
 ### What is SIPPY?
 Sippy is a problem type that was built for edX problems. (To be honest, it is really just a JSInput problem) 
