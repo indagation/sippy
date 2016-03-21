@@ -1,6 +1,6 @@
 <problem>
   <script type="loncapa/python">
-
+<![CDATA[
 ##############################
 # The following is the code needed to implement a consecutive incremental problem
 # All logic should be handled through the jsinput ConsecutiveInput.html
@@ -51,9 +51,11 @@ def increment_grade(answer_ids, student_answers, new_cmap, old_cmap):
       new_cmap.set_property(aid,'npoints',0)
   else:
     hint = 'Correct: ' + new_cmap.get_correctness(aid)
-    if old_points != 1:
+    if (old_points + incremental_value) < 1:
       new_cmap.set_property(aid,'npoints',old_points + incremental_value)
-
+    else:
+      new_cmap.set_property(aid,'npoints',1)
+]]>
 </script>
   <p>Answer 10 in a row to get full credit. Be careful though. If you miss one your score will be reset to 0.</p>
   <customresponse cfn="consecutive_feedback">
